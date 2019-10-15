@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="Untitled-2.css">
+	<title>Document</title>
+	<script src="https://kit.fontawesome.com/b63e393a8e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<h2> MATHS  ADDITION QUIZ GAME :) </h2>
+<div id="box">
+	<input type="text"  id="first">
+<h1>+</h1>
+<input type="text"  id="second" value="" >
+<input type="text" id="ans">
+<button id="check" onclick="add()">Check Answer</button>
+<i class="far fa-laugh-beam" style="font-size:0" id="text1"><i class="far fa-frown" style="font-size:0" id="text2"></i></i><h2 id="text"></h2>
+</div>	
+</body>
+<script>
+	   let n1=Math.floor(Math.random()*100);
+	   let n2=Math.floor(Math.random()*100);
+	    document.getElementById("first").value=n1;
+    document.getElementById("second").value=n2;
+	ans=n1+n2;
+    
+		function add()
+	{
+		 
+		 ans1 =document.getElementById("ans").value;
+		 document.getElementById("ans").value=" ";
+		 document.getElementById("text").innerHTML=" ";
+		document.getElementById("text2").style.fontSize="0px";
+			document.getElementById("text1").style.fontSize="0px";
+		
+		if(ans==ans1){
+		document.getElementById("text1").style.fontSize="30px";
+		document.getElementById("text").innerHTML+="   Correct Answer";
+		}
+		else{	document.getElementById("text2").style.fontSize="30px";
+			document.getElementById("text").innerHTML+="Wrong  Answer";	}
+		  n1=Math.floor(Math.random()*10);
+	    n2=Math.floor(Math.random()*10);
+	    document.getElementById("first").value=n1;
+         document.getElementById("second").value=n2;
+		 ans=n1+n2;
+		
+	}
+	
+	
+	</script>
+</html>
