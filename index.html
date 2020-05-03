@@ -1,52 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <title> Maths  GAME</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="Untitled-2.css">
+	<link rel="stylesheet" href="index.css">
 	<title>Document</title>
-	<script src="https://kit.fontawesome.com/b63e393a8e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<h2> MATHS  ADDITION QUIZ GAME :) </h2>
+<h2 TIMER> </h2>
+<h2 id ="quiz"> MATHS QUIZ GAME :) </h2>
 <div id="box">
 	<input type="text"  id="first">
-<h1>+</h1>
-<input type="text"  id="second" value="" >
+  <input type="text"  id="second" value="" >
 <input type="text" id="ans">
-<button id="check" onclick="add()">Check Answer</button>
+<button id="check" onclick="operation()">Check Answer</button>
 <i class="far fa-laugh-beam" style="font-size:0" id="text1"><i class="far fa-frown" style="font-size:0" id="text2"></i></i><h2 id="text"></h2>
+<h4 > Correct answer is : <span id="right" > </span> </h4>
+
 </div>	
+<h1 id ="tim">  TIMER </h1>
+<h1 id="time"></h1>
+
+<div class="slide">
+    <img src=images/add.jfif class ="swap1">
+    <img src=images/sub.jfif class ="swap1">
+    <img  src="images/multiply.png" class ="swap1">
+   </div>      
+ <button class=" button1"  onclick="plusDivs(-1)">&#10094;</button>
+<button class="button2"  onclick="plusDivs(+1)">&#10095;</button> 
+  
 </body>
 <script>
-	   let n1=Math.floor(Math.random()*100);
-	   let n2=Math.floor(Math.random()*100);
-	    document.getElementById("first").value=n1;
-    document.getElementById("second").value=n2;
-	ans=n1+n2;
+    var score=0;
+    var check=1;
+ var slideIndex = 1;
+    showDivs(slideIndex);
+    check=1;
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("swap1");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display= "none";
+  }
+  x[slideIndex-1].style.display="block";
+if (slideIndex==1){check=1;}
+ else if(slideIndex==2){check=2;}
+    else{check=3;}
+    answer();
+    }
     
-		function add()
+    var set=0;
+    var second=31;
+	  
+
+    answer();
+    function answer(){
+   let n1=Math.floor(Math.random()*1000);
+    let n2=Math.floor(Math.random()*1000);
+     if(n1<n2){y=n2;n2=n1;n1=y;}
+	    document.getElementById("first").value=n1;
+        document.getElementById("second").value=n2;
+    second=31;
+    set=0;
+          if(check==2){    ans=Math.abs(n1-n2);}
+     else if (check==1){ans=n1+n2;}
+    else{
+        ans=n1*n2;
+    }   
+      setTimeout(update,500);
+    }
+	
+    
+    function rightanswer()
+    {
+        
+        document.getElementById("right").innerHTML=ans;
+                
+    }
+   
+       
+        function update( )
+        {
+            if(second<=-1 ){alert("TIME OUT");clearInterval(x);answer();} 
+            if(set==1 ){clearInterval(x);}
+          
+            document.getElementById("time").innerHTML=second;
+            second--; 
+        
+         }
+
+            var x = setInterval(update,1000); 
+           
+     
+		function operation()
 	{
-		 
+        
+            set=1;
+               document.getElementById("right").innerHTML=" ";
 		 ans1 =document.getElementById("ans").value;
 		 document.getElementById("ans").value=" ";
 		 document.getElementById("text").innerHTML=" ";
 		document.getElementById("text2").style.fontSize="0px";
 			document.getElementById("text1").style.fontSize="0px";
 		
-		if(ans==ans1){
+        if(ans==ans1){
 		document.getElementById("text1").style.fontSize="30px";
 		document.getElementById("text").innerHTML+="   Correct Answer";
+            score++;
 		}
 		else{	document.getElementById("text2").style.fontSize="30px";
-			document.getElementById("text").innerHTML+="Wrong  Answer";	}
-		  n1=Math.floor(Math.random()*10);
-	    n2=Math.floor(Math.random()*10);
-	    document.getElementById("first").value=n1;
+			document.getElementById("text").innerHTML+="Wrong  Answer";	
+          }
+         
+        if(score==10){ document.getElementById("congrats").innerHTML=score;}
+        
+          rightanswer();
+		  n1=Math.floor(Math.random()*1000);
+	     n2=Math.floor(Math.random()*1000);
+         if(n1<n2){y=n2;n2=n1;n1=y;}
+	     document.getElementById("first").value=n1;
          document.getElementById("second").value=n2;
-		 ans=n1+n2;
-		
+         document.getElementById("congrats").innerHTML="";
+           second=31;
+         set=0;
+        setTimeout(update,500);
+      if(check==2){    ans=Math.abs(n1-n2);}
+       else if (check==1){ans=n1+n2;}
+    else{
+        ans=n1*n2;
+    }
+     
 	}
+    
+    function pressed(e){if(e.key=='Enter'){operation();}
+                   }
+
+document.addEventListener("keydown",pressed);
 	
-	
-	</script>
+    </script>
+    
+    
+    
 </html>
